@@ -1,461 +1,259 @@
-import java.awt.*;
-import java.awt.event.*;
+package tictactoe;
 
+import java.lang.reflect.Array;
 
-/**********************************************/
-/*USING 'X' FOR HUMAN  AND '0' FOR COMPUTER*/
-/**********************************************/
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
-
-public class TicTacMine extends java.applet.Applet implements 
-ActionListener{
-static Button squares[],nGameB;
-static Label label,aboutL;
-static int squaresRemaining=9;
-static String forAbout="",difLevel="";
-
-
-public void init(){
-
-
-setSize(500,500);
-setLayout(new BorderLayout());
-setFont(new Font("TimesRoman",Font.BOLD,30));
-Panel p1=new Panel();
-p1.setLayout(new GridLayout(3,3));
-add(p1,BorderLayout.CENTER);
-label=new Label("TIC TAC",1);
-label.setBackground(Color.black);
-label.setForeground(Color.white);
-
-add(label,BorderLayout.SOUTH);
-
-
-Panel p2=new Panel();
-p2.setLayout(new FlowLayout());
-p2.setBackground(Color.black);
-
-
-//		NEW GAME BUTTON
-nGameB=new Button("New Game");
-nGameB.setBackground(Color.black);
-nGameB.setForeground(Color.white);
-nGameB.addActionListener(new ActionListener(){
-public void actionPerformed(ActionEvent e){
-	for(int i=0;i<9;i++){
-	squares[i].setEnabled(true);
-	squares[i].setLabel("");
-	squares[i].setBackground(new Color(98,156,245));
+/**
+ *
+ * @author ZerefeL
+ */
+public class TicTacToe extends Application {
+	public int counter = 1;
+	@Override
+	public void start(Stage primaryStage) {
+		Thread runThread;
+		Button[] buttons = new Button[9];
+	    for (public int i = 0; i < buttons.length; i++) {
+			buttons[i] = new Button();
+			buttons[i].setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e) {
+					if (counter%2==0) {
+						buttons[i].setText("O");
+						counter++;	
+						
+					}
+					else {
+						buttons[i].setText("X");
+						counter++;								
+					}
+					buttons[i].setOnAction(null);
+					
+					
+					
+				}
+			});
+		}
+		// make buttons
+		Button btn1 = new Button("");
+		btn1.setPrefSize(200, 200);
+		Button btn2 = new Button("");
+		btn2.setPrefSize(200, 200);
+		Button btn3 = new Button("");
+		btn3.setPrefSize(200, 200);
+		Button btn4 = new Button("");
+		btn4.setPrefSize(200, 200);
+		Button btn5 = new Button("");
+		btn5.setPrefSize(200, 200);
+		Button btn6 = new Button("");
+		btn6.setPrefSize(200, 200);
+		Button btn7 = new Button("");
+		btn7.setPrefSize(200, 200);
+		Button btn8 = new Button("");
+		btn8.setPrefSize(200, 200);
+		Button btn9 = new Button("");
+		btn9.setPrefSize(200, 200);
+		Button newGame = new Button("New Game");
+		newGame.setPrefSize(100, 50);
+		Label score = new Label("Score: ");
+		Pane root = new Pane();
+		btn1.setLayoutX(0);
+		btn1.setLayoutY(0);
+		btn2.setLayoutX(0);
+		btn2.setLayoutY(200);
+		btn3.setLayoutX(0);
+		btn3.setLayoutY(400);
+		btn4.setLayoutX(200);
+		btn4.setLayoutY(0);
+		btn5.setLayoutX(200);
+		btn5.setLayoutY(200);
+		btn6.setLayoutX(200);
+		btn6.setLayoutY(400);
+		btn7.setLayoutX(400);
+		btn7.setLayoutY(0);
+		btn8.setLayoutX(400);
+		btn8.setLayoutY(200);
+		btn9.setLayoutX(400);
+		btn9.setLayoutY(400);
+		newGame.setLayoutX(710);
+		newGame.setLayoutY(50);
+		score.setLayoutX(650);
+		score.setLayoutY(450);
+		root.getChildren().add(buttons[0]);
+		root.getChildren().add(btn2);
+		root.getChildren().add(btn3);
+		root.getChildren().add(btn4);
+		root.getChildren().add(btn5);
+		root.getChildren().add(btn6);
+		root.getChildren().add(btn7);
+		root.getChildren().add(btn8);
+		root.getChildren().add(btn9);
+		root.getChildren().add(newGame);
+		root.getChildren().add(score);
+	    
+		
+		// Eventhandler for buttons
+		/*btn1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				if (counter%2==0) {
+					btn1.setText("O");
+					counter++;	
+					
+				}
+				else {
+					btn1.setText("X");
+					counter++;								
+				}
+				btn1.setOnAction(null);
+				
+				
+				
+			}
+		});
+		btn2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				if (counter%2==0) {
+					btn2.setText("O");
+					counter++;
+				}
+				else {
+					btn2.setText("X");
+					counter++;
+				}
+				btn2.setOnAction(null);
+			}
+		});
+		btn3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				if (counter%2==0) {
+					btn3.setText("O");
+					counter++;
+				}
+				else {
+					btn3.setText("X");
+					counter++;
+				}
+				btn3.setOnAction(null);
+			}
+		});
+		btn4.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				if (counter%2==0) {
+					btn4.setText("O");
+					counter++;
+				}
+				else {
+					btn4.setText("X");
+					counter++;
+				}
+				btn4.setOnAction(null);
+			}
+		});
+		btn5.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				if (counter%2==0) {
+					btn5.setText("O");
+					counter++;
+				}
+				else {
+					btn5.setText("X");
+					counter++;
+				}
+				btn5.setOnAction(null);
+			}
+		});
+		btn6.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				if (counter%2==0) {
+					btn6.setText("O");
+					counter++;
+				}
+				else {
+					btn6.setText("X");
+					counter++;
+				}
+				btn6.setOnAction(null);
+			}
+		});
+		btn7.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				if (counter%2==0) {
+					btn7.setText("O");
+					counter++;
+				}
+				else {
+					btn7.setText("X");
+					counter++;
+				}
+				btn7.setOnAction(null);
+			}
+		});
+		btn8.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				if (counter%2==0) {
+					btn8.setText("O");
+					counter++;
+				}
+				else {
+					btn8.setText("X");
+					counter++;
+				}
+				btn8.setOnAction(null);
+				
+			}
+		});
+		btn9.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				if (counter%2==0) {
+					btn9.setText("O");
+					counter++;
+				}
+				else {
+					btn9.setText("X");
+					counter++;
+				}
+				btn9.setOnAction(null);
+			}
+		});
+		*/
+		newGame.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {				
+				btn1.setText("");
+				btn2.setText("");
+				btn3.setText("");
+				btn4.setText("");
+				btn5.setText("");
+				btn6.setText("");
+				btn7.setText("");
+				btn8.setText("");
+				btn9.setText("");
+				
+				
+			}
+		});
+		
+		// make Scene
+		Scene scene = new Scene(root, 900, 600);
+		primaryStage.setTitle("TicTacToe");
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
-squaresRemaining=9;
-label.setText("TIC TAC");
-label.setAlignment(1);
-nGameB.setEnabled(false);
 }
-});
-p2.add(nGameB);
-
-
-
-//		ABOUT
-aboutL=new Label("About");
-aboutL.setBackground(Color.black);
-aboutL.setForeground(Color.white);
-aboutL.addMouseListener(new MouseAdapter(){
-public void mouseEntered(MouseEvent e){
-forAbout=label.getText();
-aboutL.setForeground(Color.red);
-label.setText("ADEEL MAHMOOD");
-label.setAlignment(1);
-}
-});
-
-aboutL.addMouseListener(new MouseAdapter(){
-public void mouseExited(MouseEvent e){
-aboutL.setForeground(Color.white);
-label.setText(forAbout);
-label.setAlignment(1);
-}
-});
-
-p2.add(aboutL);
-
-add(p2,BorderLayout.NORTH);
-
-
-
-squares=new Button[9];
-
-for(int i=0;i<9;i++){
-		squares[i]=new Button();
-		squares[i].addActionListener(this);
-		squares[i].setBackground(new Color(98,156,245));
-		p1.add(squares[i]);
-}
-
-
-
-
-nGameB.setEnabled(false);
-}//end init
-
-
-
-
-
-public void actionPerformed(ActionEvent e) {
-
-        for ( int i=0; i<9; i++ ) {
-              if ( e.getSource() == squares[i] ) {
-
-                if ( squares[i].getLabel().equals("X") ||
-                    squares[i].getLabel().equals("O") ) {
-                    return;
-                }
-
-
-                squares[i].setLabel("X");
-                squaresRemaining--;
-
-
-                String winner = "";
-                winner = checkForWin();
-
-                if ( winner.equals("X") || winner.equals("O") ) {
-                        endGame();
-                } else {
-                    if ( squaresRemaining <= 0 ) {
-                        endGame();
-                    } else {
-
-                        //		for animation
-			try{
-			Thread.sleep(100);}
-			catch(InterruptedException w){}
-			computerMove();
-                        squaresRemaining--;
-                        winner = checkForWin();
-                        if ( winner.equals("X") || winner.equals("O") // if 
-                                || squaresRemaining <= 0 )   // or if tie
-                        {
-                                endGame();
-                        }
-                    }
-                }
-            }
-        }
-    } // end actionPerformed
-
-
-String checkForWin() {
-
-        String theWinner = "";
-
-
-        if ( squares[0].getLabel().equals(squares[1].getLabel()) &&
-             squares[0].getLabel().equals(squares[2].getLabel()) &&
-             ! squares[0].getLabel().equals("") ) {
-             theWinner = squares[0].getLabel();
-             colorLine(0,1,2,theWinner);
-
-
-        } else if ( squares[3].getLabel().equals(squares[4].getLabel()) &&
-             squares[3].getLabel().equals(squares[5].getLabel()) &&
-             ! squares[3].getLabel().equals("") ) {
-             theWinner = squares[3].getLabel();
-             colorLine(3,4,5,theWinner);
-
-
-        } else if ( squares[6].getLabel().equals(squares[7].getLabel()) &&
-             squares[6].getLabel().equals(squares[8].getLabel()) &&
-             ! squares[6].getLabel().equals("") ) {
-             theWinner = squares[6].getLabel();
-             colorLine(6,7,8,theWinner);
-
-
-        } else if ( squares[0].getLabel().equals(squares[3].getLabel()) &&
-             squares[0].getLabel().equals(squares[6].getLabel()) &&
-             ! squares[0].getLabel().equals("") ) {
-             theWinner = squares[0].getLabel();
-             colorLine(0,3,6,theWinner);
-
-
-        } else if ( squares[1].getLabel().equals(squares[4].getLabel()) &&
-             squares[1].getLabel().equals(squares[7].getLabel()) &&
-             ! squares[1].getLabel().equals("") ) {
-             theWinner = squares[1].getLabel();
-             colorLine(1,4,7,theWinner);
-
-
-        } else if ( squares[2].getLabel().equals(squares[5].getLabel()) &&
-             squares[2].getLabel().equals(squares[8].getLabel()) &&
-             ! squares[2].getLabel().equals("") ) {
-             theWinner = squares[2].getLabel();
-             colorLine(2,5,8,theWinner);
-
-
-        } else if ( squares[0].getLabel().equals(squares[4].getLabel()) &&
-             squares[0].getLabel().equals(squares[8].getLabel()) &&
-             ! squares[0].getLabel().equals("") ) {
-             theWinner = squares[0].getLabel();
-             colorLine(0,4,8,theWinner);
-
-        } else if ( squares[2].getLabel().equals(squares[4].getLabel()) &&
-             squares[2].getLabel().equals(squares[6].getLabel()) &&
-             ! squares[2].getLabel().equals("") ) {
-             theWinner = squares[2].getLabel();
-             colorLine(2,4,6,theWinner);
-        }
-
-        return theWinner;
-}
-
-
-
-
-
-
-void computerMove() {
-
-        int pickedSquare;
-
-
-        pickedSquare = tryToWin();
-
-
-        if ( pickedSquare == -1 )
-            pickedSquare = makeBlock();
-
-          if ( (pickedSquare == -1)&&(squares[4].getLabel().equals("")) )
-	       pickedSquare=4;
-
-	 if ( pickedSquare == -1 )
-            pickedSquare = pickRandom();
-
-
-        squares[pickedSquare].setLabel("O");
-        return;
-}
-
-
-
-
-
-
-
-
-int tryToWin() {
-
-        // Since computer plays "O", find empty square that is in line with 
-
-        return EmptySquare("O");
-}
-
-    int makeBlock() {
-
-        // Since human plays "X", find  empty square that is in line with 
-        return EmptySquare("X");
-}
-
-
-
-   int EmptySquare(String player) {
-        int a[] = new int[9];
-
-	   for ( int i = 0; i < 9; i++ ) {
-            if ( squares[i].getLabel().equals("O") )
-                a[i] = -1;
-            else if ( squares[i].getLabel().equals("X") )
-                a[i] = 1;
-            else
-                a[i] = 0;
-        }
-
-int sum = player.equals("O") ? -2 : 2;
-
-        // Top Row
-        if ( a[0] + a[1] + a[2] == sum ) {
-            if ( a[0] == 0 )
-                return 0;
-            else if ( a[1] == 0 )
-                return 1;
-            else
-                return 2;
-        }
-
-        // Middle Row
-        if ( a[3] +a[4] + a[5] == sum ) {
-            if ( a[3] == 0 )
-                return 3;
-            else if ( a[4] == 0 )
-                return 4;
-            else
-                return 5;
-        }
-
-        // Bottom Row
-        if ( a[6] + a[7] +a[8] == sum ) {
-            if ( a[6] == 0 )
-                return 6;
-            else if ( a[7] == 0 )
-                return 7;
-            else
-                return 8;
-        }
-
-        // Left column
-        if ( a[0] + a[3] + a[6] == sum ) {
-            if ( a[0] == 0 )
-                return 0;
-            else if ( a[3] == 0 )
-                return 3;
-            else
-                return 6;
-        }
-
-        // Middle column
-        if ( a[1] +a[4] + a[7] == sum ) {
-            if ( a[1] == 0 )
-                return 1;
-            else if ( a[4] == 0 )
-                return 4;
-            else
-                return 7;
-        }
-
-        // right column
-        if ( a[2] + a[5] + a[8] == sum ) {
-            if ( a[2] == 0 )
-                return 2;
-            else if ( a[5] == 0 )
-                return 5;
-            else
-                return 8;
-        }
-
-        // diagonal upper-left to lower-right
-        if ( a[0] + a[4] + a[8] == sum ) {
-            if ( a[0] == 0 )
-                return 0;
-            else if ( a[4] == 0 )
-                return 4;
-            else
-                return 8;
-        }
-
-        // diagonal upper-right to lower-left
-        if ( a[2] + a[4] + a[6] == sum ) {
-            if ( a[2] == 0 )
-                return 2;
-            else if ( a[4] == 0 )
-                return 4;
-            else
-                return 6;
-        }
-
-        // not able to find
-        return -1;
-    }
-
-
-    int pickRandom() {
-
-        boolean found = false;
-        int pickedSquare = -1;
-
-        do {
-            pickedSquare = (int) (Math.random() * 9 );  // 0 to 8
-            if ( ! squares[pickedSquare].getLabel().equals("X") &&
-                 ! squares[pickedSquare].getLabel().equals("O") ) {
-
-                found = true;
-
-            }
-        } while ( ! found );
-
-        return pickedSquare;
-    } // end pickRandom()
-
-
-
-
-
-    void colorLine(int a, int b, int c,String win) {
-        // mark line red if user (X) wins
-        // mark line blue if computer (O) wins
-        if ( win.equals("X") ) {
-            squares[a].setBackground(Color.black);
-            squares[b].setBackground(Color.black);
-            squares[c].setBackground(Color.black);
-		label.setText("HUMAN WINS");
-		label.setForeground(Color.white);
-		label.setAlignment(1);
-        } else {
-            squares[a].setBackground(Color.black);
-            squares[b].setBackground(Color.black);
-            squares[c].setBackground(Color.black);
-		label.setText("          COMPUTER WINS");
-				label.setForeground(Color.white);
-				label.setAlignment(1);
-        }
-    }
-
-void endGame(){
-for(int i=0;i<9;i++)
-squares[i].setEnabled(false);
-nGameB.setEnabled(true);
-}
-
-}//end class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
