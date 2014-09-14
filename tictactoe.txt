@@ -16,32 +16,30 @@ import javafx.stage.Stage;
  * @author ZerefeL
  */
 public class TicTacToe extends Application {
-	public int counter = 1;
+	public static int counter = 1;
+
+	static void buttonAction(Button btn){
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				if (counter%2==0) {
+					btn.setText("O");
+					counter++;	
+					
+				}
+				else {
+					btn.setText("X");
+					counter++;								
+				}
+				btn.setOnAction(null);				
+			}
+		});
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
 		Thread runThread;
-		Button[] buttons = new Button[9];
-	    for (public int i = 0; i < buttons.length; i++) {
-			buttons[i] = new Button();
-			buttons[i].setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent e) {
-					if (counter%2==0) {
-						buttons[i].setText("O");
-						counter++;	
-						
-					}
-					else {
-						buttons[i].setText("X");
-						counter++;								
-					}
-					buttons[i].setOnAction(null);
-					
-					
-					
-				}
-			});
-		}
+		
 		// make buttons
 		Button btn1 = new Button("");
 		btn1.setPrefSize(200, 200);
@@ -87,7 +85,7 @@ public class TicTacToe extends Application {
 		newGame.setLayoutY(50);
 		score.setLayoutX(650);
 		score.setLayoutY(450);
-		root.getChildren().add(buttons[0]);
+		root.getChildren().add(btn1);
 		root.getChildren().add(btn2);
 		root.getChildren().add(btn3);
 		root.getChildren().add(btn4);
@@ -98,154 +96,24 @@ public class TicTacToe extends Application {
 		root.getChildren().add(btn9);
 		root.getChildren().add(newGame);
 		root.getChildren().add(score);
-	    
-		
+	  
 		// Eventhandler for buttons
-		/*btn1.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				if (counter%2==0) {
-					btn1.setText("O");
-					counter++;	
-					
-				}
-				else {
-					btn1.setText("X");
-					counter++;								
-				}
-				btn1.setOnAction(null);
-				
-				
-				
-			}
-		});
-		btn2.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				if (counter%2==0) {
-					btn2.setText("O");
-					counter++;
-				}
-				else {
-					btn2.setText("X");
-					counter++;
-				}
-				btn2.setOnAction(null);
-			}
-		});
-		btn3.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				if (counter%2==0) {
-					btn3.setText("O");
-					counter++;
-				}
-				else {
-					btn3.setText("X");
-					counter++;
-				}
-				btn3.setOnAction(null);
-			}
-		});
-		btn4.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				if (counter%2==0) {
-					btn4.setText("O");
-					counter++;
-				}
-				else {
-					btn4.setText("X");
-					counter++;
-				}
-				btn4.setOnAction(null);
-			}
-		});
-		btn5.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				if (counter%2==0) {
-					btn5.setText("O");
-					counter++;
-				}
-				else {
-					btn5.setText("X");
-					counter++;
-				}
-				btn5.setOnAction(null);
-			}
-		});
-		btn6.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				if (counter%2==0) {
-					btn6.setText("O");
-					counter++;
-				}
-				else {
-					btn6.setText("X");
-					counter++;
-				}
-				btn6.setOnAction(null);
-			}
-		});
-		btn7.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				if (counter%2==0) {
-					btn7.setText("O");
-					counter++;
-				}
-				else {
-					btn7.setText("X");
-					counter++;
-				}
-				btn7.setOnAction(null);
-			}
-		});
-		btn8.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				if (counter%2==0) {
-					btn8.setText("O");
-					counter++;
-				}
-				else {
-					btn8.setText("X");
-					counter++;
-				}
-				btn8.setOnAction(null);
-				
-			}
-		});
-		btn9.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				if (counter%2==0) {
-					btn9.setText("O");
-					counter++;
-				}
-				else {
-					btn9.setText("X");
-					counter++;
-				}
-				btn9.setOnAction(null);
-			}
-		});
-		*/
+		Button[] buttons = {btn1,btn2,btn3,btn4,btn6,btn6,btn7,btn8,btn9};
+		for (int i = 0; i < buttons.length; i++) {
+			buttonAction(buttons[i]);
+		}		
+		
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {				
-				btn1.setText("");
-				btn2.setText("");
-				btn3.setText("");
-				btn4.setText("");
-				btn5.setText("");
-				btn6.setText("");
-				btn7.setText("");
-				btn8.setText("");
-				btn9.setText("");
-				
+				for (int i = 0; i < buttons.length; i++) {
+					buttons[i].setText("");
+				}
+
+				for (int i = 0; i < buttons.length; i++) {
+					buttonAction(buttons[i]);
+				}		
+				counter=1;
 				
 			}
 		});
