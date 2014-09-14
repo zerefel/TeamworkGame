@@ -23,9 +23,8 @@ public class TicTacToe extends Application {
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
-        btn.setText("Say 'Hello World'");
+        btn.setPrefSize(200, 200);
         btn.setOnAction(new EventHandler<ActionEvent>() {
-            
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Hello World!");
@@ -35,9 +34,8 @@ public class TicTacToe extends Application {
         StackPane root = new StackPane();
         root.getChildren().add(btn);
         
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
+        Scene scene = new Scene(root, 800, 600);
+        primaryStage.setTitle("TicTacToe");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
