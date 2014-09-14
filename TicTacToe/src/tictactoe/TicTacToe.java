@@ -45,7 +45,7 @@ public class TicTacToe extends Application {
         Button newGame = new Button("New Game");
         newGame.setPrefSize(100, 50);
         
-        Label score = new Label("Score: ");
+        Label score = new Label("Score");
                
         Pane root = new Pane();
         btn1.setLayoutX(0);
