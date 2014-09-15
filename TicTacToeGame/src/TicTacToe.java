@@ -28,7 +28,8 @@ public class TicTacToe extends Application {
 			
 			@Override
 			public void handle(ActionEvent e) {
-				if (counter%2==0) {	
+				if (counter%2==0) {
+					//Loads images from the hard drive	
 					File file = new File("C:/Users/Sven/workspace/TicTacToeGame/src/btn_images/green-cd-icon.png");
 					Image image = new Image(file.toURI().toString());
 					btn.setGraphic(new ImageView(image));
@@ -36,6 +37,7 @@ public class TicTacToe extends Application {
 					counter++;					
 				}
 				else {
+					//Loads images from the hard drive
 					File file = new File("C:/Users/Sven/workspace/TicTacToeGame/src/btn_images/blue-cross-icon.png");
 					Image image = new Image(file.toURI().toString()); 
 					btn.setGraphic(new ImageView(image));
