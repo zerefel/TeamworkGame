@@ -41,7 +41,6 @@ public class TicTacToe_Nikola extends Application {
 					xPlayerTurn = -xPlayerTurn;		
 					if (i != -1) {
 						board[i] = 1;
-						count++;
 						//btn.setText("X");
 						
 						isWin(1);
@@ -58,7 +57,6 @@ public class TicTacToe_Nikola extends Application {
 					xPlayerTurn = -xPlayerTurn;
 					if (i != -1) {
 						board[i] = 2;
-						count++;
 						isWin(2);
 						System.out.println("Winner: " + isWin(2));
 						System.out.println("Draw: " + isDraw());
@@ -171,7 +169,6 @@ public class TicTacToe_Nikola extends Application {
 				
 				xPlayerToStartFirst = -xPlayerToStartFirst;
 				xPlayerTurn = xPlayerToStartFirst;	
-				count = 0;
 				
 				for (int i = 0; i < board.length; i++) {
 					board[i] = 0;
