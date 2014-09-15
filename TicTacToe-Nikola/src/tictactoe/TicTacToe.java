@@ -18,12 +18,15 @@ import javafx.stage.Stage;
  * @author ZerefeL
  */
 public class TicTacToe_Nikola extends Application {
-	public static boolean firstPlayerTurn = true;
+	
+	public static boolean xPlayerToStartFirst = true;
+	public static boolean xPlayerTurn = xPlayerToStartFirst;
+
 	
 	public int[] board = new int[9];
 	
-	public static File file1 = new File("src/btn_images/blue-cross-icon.png");
-	public static File file2 = new File("src/btn_images/green-cd-icon.png");
+	public static File xImage = new File("src/btn_images/blue-cross-icon.png");
+	public static File oImage = new File("src/btn_images/green-cd-icon.png");
 	
 	static void buttonAction(Button btn){
 			
@@ -31,15 +34,15 @@ public class TicTacToe_Nikola extends Application {
 			
 			@Override
 			public void handle(ActionEvent e) {
-				if (firstPlayerTurn) {
-					Image image = new Image(file1.toURI().toString());  
+				if (xPlayerTurn) {
+					Image image = new Image(xImage.toURI().toString());  
 					btn.setGraphic(new ImageView(image));
-					firstPlayerTurn = !firstPlayerTurn;					
+					xPlayerTurn = !xPlayerTurn;					
 				}
 				else {
-					Image image = new Image(file2.toURI().toString());
+					Image image = new Image(oImage.toURI().toString());
 					btn.setGraphic(new ImageView(image));
-					firstPlayerTurn = !firstPlayerTurn;								
+					xPlayerTurn = !xPlayerTurn;								
 				}
 				btn.setOnAction(null);				
 			}
@@ -96,6 +99,10 @@ public class TicTacToe_Nikola extends Application {
 		newGame.setLayoutY(50);
 		score.setLayoutX(650);
 		score.setLayoutY(450);
+		
+		lblStatus.setLayoutX(650);
+		lblStatus.setLayoutY(500);
+		
 		root.getChildren().add(btn1);
 		root.getChildren().add(btn2);
 		root.getChildren().add(btn3);
@@ -107,6 +114,7 @@ public class TicTacToe_Nikola extends Application {
 		root.getChildren().add(btn9);
 		root.getChildren().add(newGame);
 		root.getChildren().add(score);
+		root.getChildren().add(lblStatus);
 	  
 		
 		
@@ -128,7 +136,9 @@ public class TicTacToe_Nikola extends Application {
 				for (int i = 0; i < buttons.length; i++) {
 					buttonAction(buttons[i]);
 				}		
-				firstPlayerTurn = true;			
+				
+				xPlayerToStartFirst = !xPlayerToStartFirst;
+				xPlayerTurn = xPlayerToStartFirst;			
 				
 				for (int i = 0; i < board.length; i++) {
 					board[i] = 0;
@@ -143,8 +153,8 @@ public class TicTacToe_Nikola extends Application {
 		primaryStage.show();
 	}
 	
-	public static void checkWinner () {
-		return;
+	public static boolean checkWinner (int x) {
+		return true;
 	}
 	
 	public static void main(String[] args) {
