@@ -13,25 +13,32 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ZerefeL
  */
+
 public class TicTacToe_Nikola extends Application {
 		
-	public static int xPlayerToStartFirst = 1;
-	public static int xPlayerTurn = xPlayerToStartFirst;
+	static int xPlayerToStartFirst = 1;
+	static int playerTurn = xPlayerToStartFirst;
 	static int xPlayerScore = 0;
 	static int oPlayerScore = 0;
+	static int count = 0;
 	
-	public static Label lblStatus = new Label();
-	public static Label xScore = new Label("X score: 0");
-	public static Label oScore = new Label("O score: 0");	
+	static Label lblStatus = new Label();
+	static Label xScore = new Label("X score: 0");
+	static Label oScore = new Label("O score: 0");	
 	
-	public static int[] board = new int[9];
+	static int[] board = new int[9];
 	
-	public static File xImage = new File("src/btn_images/blue-cross-icon.png");
-	public static File oImage = new File("src/btn_images/green-cd-icon.png");
+	static File xFile = new File("src/btn_images/blue-cross-icon.png");
+	static Image xImage = new Image(xFile.toURI().toString());  
+	static File oFile = new File("src/btn_images/green-cd-icon.png");
+	static Image oImage = new Image(oFile.toURI().toString());
+	
 	
 	static void buttonAction(Button btn, int i){
 			
@@ -39,43 +46,46 @@ public class TicTacToe_Nikola extends Application {
 			
 			@Override
 			public void handle(ActionEvent e) {
-				if (xPlayerTurn == 1) {							
-					if (i != -1) {
-						Image image = new Image(xImage.toURI().toString());  
-						btn.setGraphic(new ImageView(image));
-						xPlayerTurn = -xPlayerTurn;
-						board[i] = 1;
-						
+				if (playerTurn == 1) {												
+						btn.setGraphic(new ImageView(xImage));					
+						playerTurn = -playerTurn;			
+						board[i] = 1;	
+						count++;
 						if (isWin(1)) {
-							xPlayerTurn = 0;
+							playerTurn = 0;
 							xPlayerScore++;
-							lblStatus.setText("Player X wins!");
-							xScore.setText("X score: " + xPlayerScore);
+							count = 0;
+							//lblStatus.setText("Player X wins!");
+							xScore.setText("X score: " + xPlayerScore);							
+							JOptionPane.showMessageDialog(null, "X " + " WINS!");
 							
 						} else {
 							lblStatus.setText("O's turn");
-						}
-						
-						
-					}				
-				}
-				else if (xPlayerTurn == -1){
-					Image image = new Image(oImage.toURI().toString());
-					btn.setGraphic(new ImageView(image));
-					xPlayerTurn = -xPlayerTurn;
-					if (i != -1) {				
-						board[i] = 2;
-						if (isWin(2)) {
-							xPlayerTurn = 0;
-							oPlayerScore++;
-							lblStatus.setText("Player O wins!");
-							oScore.setText("O score: " + oPlayerScore);
-						} else {
-							lblStatus.setText("X's turn");
-						}					
-					}
+						}						
+					
+				} else if (playerTurn == -1){
+					
+					btn.setGraphic(new ImageView(oImage));
+					playerTurn = -playerTurn;			
+					board[i] = 2;
+					count++;
+					if (isWin(2)) {
+						playerTurn = 0;
+						oPlayerScore++;
+						count = 0;
+						//lblStatus.setText("Player O wins!");
+						oScore.setText("O score: " + oPlayerScore);
+						JOptionPane.showMessageDialog(null, "О " + " WINS!");
+					} else {
+						lblStatus.setText("X's turn");
+					}					
 				}
 				
+				if (count == 9) {
+					//lblStatus.setText("Draw.");
+					JOptionPane.showMessageDialog(null, "Draw.");
+				}
+							
 				btn.setOnAction(null);				
 			}
 		});
@@ -168,8 +178,8 @@ public class TicTacToe_Nikola extends Application {
 				}
 
 				xPlayerToStartFirst = -xPlayerToStartFirst;
-				xPlayerTurn = xPlayerToStartFirst;
-				
+				playerTurn = xPlayerToStartFirst;
+				count = 0;			
 				
 				lblStatus.setText("X's turn");
 				
@@ -181,11 +191,11 @@ public class TicTacToe_Nikola extends Application {
 					board[i] = 0;
 				}	
 				
-				if (xPlayerTurn == 1) {
+				if (playerTurn == 1) {
 					lblStatus.setText("X's turn");
 				} else {
 					lblStatus.setText("O's turn");
-				}
+				}						
 			}
 		});
 						
@@ -198,32 +208,23 @@ public class TicTacToe_Nikola extends Application {
 	
 	public static boolean isWin (int x) {
 		
-		if ((board[0] == board[1] && board[1] == board[2] && board [2] == x)
+		if ((	//check rows
+				board[0] == board[1] && board[1] == board[2] && board [2] == x)
 			|| (board[3] == board[4] && board[4] == board[5] && board[5] == x)
 			|| (board[6] == board[7] && board[7] == board[8] && board[8] == x)
 			
+				//check columns
 			|| (board[0] == board[3] && board[3] == board[6] && board[6] == x)
 			|| (board[1] == board[4] && board[4] == board[7] && board[7] == x)
 			|| (board[2] == board[5] && board[5] == board[8] && board[8] == x)
 			
+				//check diagonals
 			|| (board[0] == board[4] && board[4] == board[8] && board[8] == x)
 			|| (board[2] == board[4] && board[4] == board[6] && board[6] == x)) {
 			
 			return true;
-		}
-					
+		}					
 		return false;
-	}
-	
-	public static boolean isDraw (){
-		boolean allMovesDone = true;
-		
-		for (int i : board) {
-			if (i == 0) {
-				allMovesDone = false;
-			}
-		}	
-		return allMovesDone;
 	}
 	
 	public static void main(String[] args) {
