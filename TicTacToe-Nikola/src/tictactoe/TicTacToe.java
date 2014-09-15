@@ -35,19 +35,22 @@ public class TicTacToe_Nikola extends Application {
 			
 			@Override
 			public void handle(ActionEvent e) {
-				if (xPlayerTurn == 1) {
-					Image image = new Image(xImage.toURI().toString());  
-					btn.setGraphic(new ImageView(image));
-					xPlayerTurn = -xPlayerTurn;		
+				if (xPlayerTurn == 1) {							
 					if (i != -1) {
+						Image image = new Image(xImage.toURI().toString());  
+						btn.setGraphic(new ImageView(image));
+						xPlayerTurn = -xPlayerTurn;
 						board[i] = 1;
 						
 						if (isWin(1)) {
 							xPlayerTurn = 0;
+							xPlayerScore++;
+							System.out.println("Player X wins!");						
+						} else {
+							isWin(1);
+							System.out.println("Winner: " + isWin(1));
+							System.out.println("Draw: " + isDraw());
 						}
-						isWin(1);
-						System.out.println("Winner: " + isWin(1));
-						System.out.println("Draw: " + isDraw());
 					}				
 				}
 				else if (xPlayerTurn == -1){
@@ -58,12 +61,16 @@ public class TicTacToe_Nikola extends Application {
 						board[i] = 2;
 						if (isWin(2)) {
 							xPlayerTurn = 0;
-						}
-						isWin(2);
-						System.out.println("Winner: " + isWin(2));
-						System.out.println("Draw: " + isDraw());
+							oPlayerScore++;
+							System.out.println("Player O wins!");
+						} else {
+							isWin(2);
+							
+							System.out.println("Draw: " + isDraw());
+						}					
 					}
 				}
+				
 				btn.setOnAction(null);				
 			}
 		});
@@ -76,31 +83,22 @@ public class TicTacToe_Nikola extends Application {
 		// make buttons
 		Button btn1 = new Button("");
 		btn1.setPrefSize(200, 200);
-		btn1.setStyle("-fx-text-color: transparent;");
 		Button btn2 = new Button("");
 		btn2.setPrefSize(200, 200);
-		btn2.setStyle("-fx-text-color: transparent;");
 		Button btn3 = new Button("");
 		btn3.setPrefSize(200, 200);
-		btn3.setStyle("-fx-text-color: transparent;");
 		Button btn4 = new Button("");
 		btn4.setPrefSize(200, 200);
-		btn4.setStyle("-fx-text-color: transparent;");
 		Button btn5 = new Button("");
 		btn5.setPrefSize(200, 200);
-		btn5.setStyle("-fx-text-color: transparent;");
 		Button btn6 = new Button("");
 		btn6.setPrefSize(200, 200);
-		btn6.setStyle("-fx-text-color: transparent;");
 		Button btn7 = new Button("");
 		btn7.setPrefSize(200, 200);
-		btn7.setStyle("-fx-text-color: transparent;");
 		Button btn8 = new Button("");
 		btn8.setPrefSize(200, 200);
-		btn8.setStyle("-fx-text-color: transparent;");
 		Button btn9 = new Button("");
 		btn9.setPrefSize(200, 200);
-		btn9.setStyle("-fx-text-color: transparent;");
 		Button newGame = new Button("New Game");
 		newGame.setPrefSize(100, 50);
 		Label score = new Label("Score: ");
@@ -127,11 +125,9 @@ public class TicTacToe_Nikola extends Application {
 		newGame.setLayoutX(710);
 		newGame.setLayoutY(50);
 		score.setLayoutX(650);
-		score.setLayoutY(450);
-		
+		score.setLayoutY(450);		
 		lblStatus.setLayoutX(650);
-		lblStatus.setLayoutY(500);
-		
+		lblStatus.setLayoutY(500);		
 		root.getChildren().add(btn1);
 		root.getChildren().add(btn2);
 		root.getChildren().add(btn3);
@@ -145,7 +141,6 @@ public class TicTacToe_Nikola extends Application {
 		root.getChildren().add(score);
 		root.getChildren().add(lblStatus);
 	  
-		
 		
 		// Eventhandler for buttons
 		Button[] buttons = {btn1,btn4,btn7,btn2,btn5,btn8,btn3,btn6,btn9};
@@ -161,20 +156,19 @@ public class TicTacToe_Nikola extends Application {
 					buttons[i].setGraphic(null);
 				}
 
-				for (int i = 0; i < buttons.length; i++) {
-					buttonAction(buttons[i], -1);
-				}		
-				
 				xPlayerToStartFirst = -xPlayerToStartFirst;
-				xPlayerTurn = xPlayerToStartFirst;	
+				xPlayerTurn = xPlayerToStartFirst;
+				
+				for (int i = 0; i < buttons.length; i++) {
+					buttonAction(buttons[i], i);
+				}					
 				
 				for (int i = 0; i < board.length; i++) {
 					board[i] = 0;
 				}				
 			}
 		});
-		
-					
+						
 		// make Scene
 		Scene scene = new Scene(root, 900, 600);
 		primaryStage.setTitle("TicTacToe");
@@ -201,7 +195,6 @@ public class TicTacToe_Nikola extends Application {
 		return false;
 	}
 	
-	
 	public static boolean isDraw (){
 		boolean allMovesDone = true;
 		
@@ -211,11 +204,6 @@ public class TicTacToe_Nikola extends Application {
 			}
 		}	
 		return allMovesDone;
-	}
-	
-	private void handleMouseClick(int x) {
-		
-		
 	}
 	
 	public static void main(String[] args) {
