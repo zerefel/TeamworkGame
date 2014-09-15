@@ -30,7 +30,7 @@ public class TicTacToe extends Application {
 			public void handle(ActionEvent e) {
 				if (counter%2==0) {
 					//Loads images from the hard drive	
-					File file = new File("C:/Users/Sven/workspace/TicTacToeGame/src/btn_images/green-cd-icon.png");
+					File file = new File("C:/Users/.../workspace/TicTacToeGame/src/btn_images/green-cd-icon.png");
 					Image image = new Image(file.toURI().toString());
 					btn.setGraphic(new ImageView(image));
 					//btn.setText("O");
@@ -38,7 +38,7 @@ public class TicTacToe extends Application {
 				}
 				else {
 					//Loads images from the hard drive
-					File file = new File("C:/Users/Sven/workspace/TicTacToeGame/src/btn_images/blue-cross-icon.png");
+					File file = new File("C:/Users/.../workspace/TicTacToeGame/src/btn_images/blue-cross-icon.png");
 					Image image = new Image(file.toURI().toString()); 
 					btn.setGraphic(new ImageView(image));
 					//btn.setText("X");
