@@ -21,8 +21,8 @@ public class TicTacToe_Nikola extends Application {
 	
 	public static int xPlayerToStartFirst = 1;
 	public static int xPlayerTurn = xPlayerToStartFirst;
-	
-	//private char whoseTurn = 'X';
+	static int xPlayerScore = 0;
+	static int oPlayerScore = 0;
 	
 	public static int[] board = new int[9];
 	
@@ -41,28 +41,27 @@ public class TicTacToe_Nikola extends Application {
 					xPlayerTurn = -xPlayerTurn;		
 					if (i != -1) {
 						board[i] = 1;
-						//btn.setText("X");
 						
+						if (isWin(1)) {
+							xPlayerTurn = 0;
+						}
 						isWin(1);
 						System.out.println("Winner: " + isWin(1));
 						System.out.println("Draw: " + isDraw());
-						for (int i : board) {
-							System.out.println(i);
-						}
 					}				
 				}
 				else if (xPlayerTurn == -1){
 					Image image = new Image(oImage.toURI().toString());
 					btn.setGraphic(new ImageView(image));
 					xPlayerTurn = -xPlayerTurn;
-					if (i != -1) {
+					if (i != -1) {				
 						board[i] = 2;
+						if (isWin(2)) {
+							xPlayerTurn = 0;
+						}
 						isWin(2);
 						System.out.println("Winner: " + isWin(2));
 						System.out.println("Draw: " + isDraw());
-						for (int i : board) {
-							System.out.println(i);
-						}
 					}
 				}
 				btn.setOnAction(null);				
@@ -158,8 +157,7 @@ public class TicTacToe_Nikola extends Application {
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {				
-				for (int i = 0; i < buttons.length; i++) {
-					
+				for (int i = 0; i < buttons.length; i++) {					
 					buttons[i].setGraphic(null);
 				}
 
