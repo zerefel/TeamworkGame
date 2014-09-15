@@ -18,11 +18,15 @@ import javafx.stage.Stage;
  * @author ZerefeL
  */
 public class TicTacToe_Nikola extends Application {
-	
+		
 	public static int xPlayerToStartFirst = 1;
 	public static int xPlayerTurn = xPlayerToStartFirst;
 	static int xPlayerScore = 0;
 	static int oPlayerScore = 0;
+	
+	public static Label lblStatus = new Label();
+	public static Label xScore = new Label("X score: 0");
+	public static Label oScore = new Label("O score: 0");	
 	
 	public static int[] board = new int[9];
 	
@@ -45,12 +49,14 @@ public class TicTacToe_Nikola extends Application {
 						if (isWin(1)) {
 							xPlayerTurn = 0;
 							xPlayerScore++;
-							System.out.println("Player X wins!");						
+							lblStatus.setText("Player X wins!");
+							xScore.setText("X score: " + xPlayerScore);
+							
 						} else {
-							isWin(1);
-							System.out.println("Winner: " + isWin(1));
-							System.out.println("Draw: " + isDraw());
+							lblStatus.setText("O's turn");
 						}
+						
+						
 					}				
 				}
 				else if (xPlayerTurn == -1){
@@ -62,11 +68,10 @@ public class TicTacToe_Nikola extends Application {
 						if (isWin(2)) {
 							xPlayerTurn = 0;
 							oPlayerScore++;
-							System.out.println("Player O wins!");
+							lblStatus.setText("Player O wins!");
+							oScore.setText("O score: " + oPlayerScore);
 						} else {
-							isWin(2);
-							
-							System.out.println("Draw: " + isDraw());
+							lblStatus.setText("X's turn");
 						}					
 					}
 				}
@@ -100,9 +105,9 @@ public class TicTacToe_Nikola extends Application {
 		Button btn9 = new Button("");
 		btn9.setPrefSize(200, 200);
 		Button newGame = new Button("New Game");
-		newGame.setPrefSize(100, 50);
-		Label score = new Label("Score: ");
-		final Label lblStatus = new Label("X's turn");
+		newGame.setPrefSize(100, 50);		
+		lblStatus.setText("X's turn");
+		Label version = new Label("v1.0");
 		Pane root = new Pane();
 		btn1.setLayoutX(0);
 		btn1.setLayoutY(0);
@@ -124,10 +129,14 @@ public class TicTacToe_Nikola extends Application {
 		btn9.setLayoutY(400);
 		newGame.setLayoutX(710);
 		newGame.setLayoutY(50);
-		score.setLayoutX(650);
-		score.setLayoutY(450);		
+		xScore.setLayoutX(650);
+		xScore.setLayoutY(430);	
+		oScore.setLayoutX(650);
+		oScore.setLayoutY(450);	
 		lblStatus.setLayoutX(650);
-		lblStatus.setLayoutY(500);		
+		lblStatus.setLayoutY(500);
+		version.setLayoutX(870);
+		version.setLayoutY(580);
 		root.getChildren().add(btn1);
 		root.getChildren().add(btn2);
 		root.getChildren().add(btn3);
@@ -138,8 +147,10 @@ public class TicTacToe_Nikola extends Application {
 		root.getChildren().add(btn8);
 		root.getChildren().add(btn9);
 		root.getChildren().add(newGame);
-		root.getChildren().add(score);
+		root.getChildren().add(xScore);
+		root.getChildren().add(oScore);
 		root.getChildren().add(lblStatus);
+		root.getChildren().add(version);
 	  
 		
 		// Eventhandler for buttons
@@ -159,13 +170,22 @@ public class TicTacToe_Nikola extends Application {
 				xPlayerToStartFirst = -xPlayerToStartFirst;
 				xPlayerTurn = xPlayerToStartFirst;
 				
+				
+				lblStatus.setText("X's turn");
+				
 				for (int i = 0; i < buttons.length; i++) {
 					buttonAction(buttons[i], i);
 				}					
 				
 				for (int i = 0; i < board.length; i++) {
 					board[i] = 0;
-				}				
+				}	
+				
+				if (xPlayerTurn == 1) {
+					lblStatus.setText("X's turn");
+				} else {
+					lblStatus.setText("O's turn");
+				}
 			}
 		});
 						
