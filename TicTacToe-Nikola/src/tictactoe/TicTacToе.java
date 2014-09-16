@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  * @author ZerefeL
  */
 
-public class TicTacToå extends Application {
+public class TicTacToe extends Application {
 		
 	static int xPlayerToStartFirst = 1;
 	static int playerTurn = xPlayerToStartFirst;
@@ -225,7 +225,7 @@ public class TicTacToå extends Application {
 		Scene scene = new Scene(root, 900, 600);
 		primaryStage.setTitle("TicTacToe");
 		primaryStage.setScene(scene);
-		scene.getStylesheets().add(TicTacToå.class.getResource("button_effects.css").toExternalForm());
+		scene.getStylesheets().add(TicTacToe.class.getResource("button_effects.css").toExternalForm());
 		primaryStage.show();	
 	}
 	
