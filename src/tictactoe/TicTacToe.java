@@ -73,7 +73,7 @@ public class TicTacToe extends Application {
 		exitGame.setPrefSize(105, 50);
 		xScore.setId(("xScore"));
 		oScore.setId(("oScore"));
-		status.setId(("lblStatus"));
+		status.setId(("status"));
 		status.setText("X's turn");		
 		version.setId(("version"));
 				 
