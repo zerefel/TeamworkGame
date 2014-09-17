@@ -20,101 +20,61 @@ import javafx.stage.Stage;
 
 public class TicTacToe extends Application {
 		
-	static int xPlayerToStartFirst = 1;
-	static int playerTurn = xPlayerToStartFirst;
+	static int playerToStartFirst = 1;
+	static int playerTurn = playerToStartFirst;
 	static int xPlayerScore = 0;
 	static int oPlayerScore = 0;
 	static int count = 0;
-	
+	static int[] board = new int[9];
+	static Button btn1 = new Button("");
+	static Button btn2 = new Button("");
+	static Button btn3 = new Button("");
+	static Button btn4 = new Button("");
+	static Button btn5 = new Button("");
+	static Button btn6 = new Button("");
+	static Button btn7 = new Button("");
+	static Button btn8 = new Button("");
+	static Button btn9 = new Button("");
+	static Button newGame = new Button("New Game");
+	static Button resetScore = new Button("Reset Score");
 	static Label status = new Label();
 	static Label xScore = new Label("X score: 0");
 	static Label oScore = new Label("O score: 0");	
 	
-	static int[] board = new int[9];
 	
 	static File xFile = new File("images/blue-cross-icon.png");
 	static Image xImage = new Image(xFile.toURI().toString());  
+	//static Image xImage = new Image("http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/128/blue-cross-icon.png"); 
 	static File oFile = new File("images/green-cd-icon.png");
-	static Image oImage = new Image(oFile.toURI().toString());
+	static Image oImage = new Image(oFile.toURI().toString());	
+	//static Image oImage = new Image("http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/128/green-cd-icon.png");	
 	
-	
-	static void buttonAction(Button btn, int i){
-			
-		btn.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent e) {
-				if (playerTurn == 1) {												
-						btn.setGraphic(new ImageView(xImage));					
-						playerTurn = -playerTurn;			
-						board[i] = 1;	
-						count++;
-						if (isWin(1)) {
-							playerTurn = 0;
-							xPlayerScore++;
-							count = 0;
-							status.setText("X wins!");
-							xScore.setText("X score: " + xPlayerScore);							
-							//JOptionPane.showMessageDialog(null, "X " + " WINS!");
-							
-						} else {
-							status.setText("O's turn");
-						}						
-					
-				} else if (playerTurn == -1){
-					
-					btn.setGraphic(new ImageView(oImage));
-					playerTurn = -playerTurn;			
-					board[i] = 2;
-					count++;
-					if (isWin(2)) {
-						playerTurn = 0;
-						oPlayerScore++;
-						count = 0;
-						status.setText("O wins!");
-						oScore.setText("O score: " + oPlayerScore);
-						//JOptionPane.showMessageDialog(null, "Î " + " WINS!");
-					} else {
-						status.setText("X's turn");
-					}					
-				}
-				
-				if (count == 9) {
-					status.setText("Draw");
-					//JOptionPane.showMessageDialog(null, "Draw.");
-				}
-							
-				btn.setOnAction(null);				
-			}
-		});
-	}
 	
 	@Override
 	public void start(Stage primaryStage) {
-		//Thread runThread;
+		
+			
 		
 		// make buttons and labels
-		Button btn1 = new Button("");
+		
 		btn1.setPrefSize(200, 200);
-		Button btn2 = new Button("");
+		//Button btn2 = new Button("");
 		btn2.setPrefSize(200, 200);
-		Button btn3 = new Button("");
+		//Button btn3 = new Button("");
 		btn3.setPrefSize(200, 200);
-		Button btn4 = new Button("");
+		//Button btn4 = new Button("");
 		btn4.setPrefSize(200, 200);
-		Button btn5 = new Button("");
+		//Button btn5 = new Button("");
 		btn5.setPrefSize(200, 200);
-		Button btn6 = new Button("");
+		//Button btn6 = new Button("");
 		btn6.setPrefSize(200, 200);
-		Button btn7 = new Button("");
+		//Button btn7 = new Button("");
 		btn7.setPrefSize(200, 200);
-		Button btn8 = new Button("");
+		//Button btn8 = new Button("");
 		btn8.setPrefSize(200, 200);
-		Button btn9 = new Button("");
-		btn9.setPrefSize(200, 200);
-		Button newGame = new Button("New Game");
-		newGame.setPrefSize(105, 50);
-		final Button resetScore = new Button("Reset Score");
+		//Button btn9 = new Button("");
+		btn9.setPrefSize(200, 200);		
+		newGame.setPrefSize(105, 50);	
 		resetScore.setPrefSize(105, 50);	
 		xScore.setId(("xScore"));
 		oScore.setId(("oScore"));
@@ -127,20 +87,20 @@ public class TicTacToe extends Application {
 		//layouts
 		btn1.setLayoutX(0);
 		btn1.setLayoutY(0);
-		btn2.setLayoutX(0);
-		btn2.setLayoutY(200);
-		btn3.setLayoutX(0);
-		btn3.setLayoutY(400);
-		btn4.setLayoutX(200);
-		btn4.setLayoutY(0);
+		btn2.setLayoutX(200);
+		btn2.setLayoutY(0);
+		btn3.setLayoutX(400);
+		btn3.setLayoutY(0);
+		btn4.setLayoutX(0);
+		btn4.setLayoutY(200);
 		btn5.setLayoutX(200);
 		btn5.setLayoutY(200);
-		btn6.setLayoutX(200);
-		btn6.setLayoutY(400);
-		btn7.setLayoutX(400);
-		btn7.setLayoutY(0);
-		btn8.setLayoutX(400);
-		btn8.setLayoutY(200);
+		btn6.setLayoutX(400);
+		btn6.setLayoutY(200);
+		btn7.setLayoutX(0);
+		btn7.setLayoutY(400);
+		btn8.setLayoutX(200);
+		btn8.setLayoutY(400);
 		btn9.setLayoutX(400);
 		btn9.setLayoutY(400);	
 		newGame.setLayoutX(710);
@@ -176,24 +136,84 @@ public class TicTacToe extends Application {
 	  
 		
 		// Eventhandler for buttons
-		Button[] buttons = {btn1,btn4,btn7,btn2,btn5,btn8,btn3,btn6,btn9};
+		Button[] buttons = {btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
 		for (int i = 0; i < buttons.length; i++) {
 			buttonAction(buttons[i], i);
 			
-		}		
+		}	
+				
+		// make Scene
+		Scene scene = new Scene(root, 900, 600);
+		primaryStage.setTitle("TicTacToe");
+		primaryStage.setScene(scene);
+		scene.getStylesheets().add(TicTacToe.class.getResource("button_effects.css").toExternalForm());
+		primaryStage.show();
+		
+		newGame(buttons);	
+		resetScore();
+	}
+	
+	static void buttonAction(Button btn, int i){
+		
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent e) {
+				if (playerTurn == 1) {												
+						btn.setGraphic(new ImageView(xImage));					
+						playerTurn = -playerTurn;			
+						board[i] = 1;	
+						count++;
+						if (isWin(1)) {
+							playerTurn = 0;
+							xPlayerScore++;
+							count = 0;
+							status.setText("X wins!");
+							xScore.setText("X score: " + xPlayerScore);							
+							
+						} else {
+							status.setText("O's turn");
+						}						
+					
+				} else if (playerTurn == -1){
+					
+					btn.setGraphic(new ImageView(oImage));
+					playerTurn = -playerTurn;			
+					board[i] = 2;
+					count++;
+					if (isWin(2)) {
+						playerTurn = 0;
+						oPlayerScore++;
+						count = 0;
+						status.setText("O wins!");
+						oScore.setText("O score: " + oPlayerScore);
+					} else {
+						status.setText("X's turn");
+					}					
+				}
+				
+				if (count == 9) {
+					status.setText("Draw");
+				}
+										
+				btn.setOnAction(null);				
+			}
+		});
+	}	
+	
+	static void newGame (Button[] buttons){
 		
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {				
 				for (int i = 0; i < buttons.length; i++) {					
 					buttons[i].setGraphic(null);
+					buttons[i].setId("");
 				}
 
-				xPlayerToStartFirst = -xPlayerToStartFirst;
-				playerTurn = xPlayerToStartFirst;
-				count = 0;			
-				
-				status.setText("X's turn");
+				playerToStartFirst = -playerToStartFirst;
+				playerTurn = playerToStartFirst;
+				count = 0;							
 				
 				for (int i = 0; i < buttons.length; i++) {
 					buttonAction(buttons[i], i);
@@ -210,9 +230,10 @@ public class TicTacToe extends Application {
 				}						
 			}
 		});
-		
+	}
+	
+	static void resetScore(){
 		resetScore.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent e) {		
 				xPlayerScore = 0;
 				oPlayerScore = 0;
@@ -220,19 +241,12 @@ public class TicTacToe extends Application {
 				oScore.setText("O score: " + oPlayerScore);
 			}
 		});
-						
-		// make Scene
-		Scene scene = new Scene(root, 900, 600);
-		primaryStage.setTitle("TicTacToe");
-		primaryStage.setScene(scene);
-		scene.getStylesheets().add(TicTacToe.class.getResource("button_effects.css").toExternalForm());
-		primaryStage.show();	
 	}
 	
 	public static boolean isWin (int x) {
 		
-		if ((	//check rows
-				board[0] == board[1] && board[1] == board[2] && board [2] == x)
+		if (	//check rows
+			   (board[0] == board[1] && board[1] == board[2] && board [2] == x)
 			|| (board[3] == board[4] && board[4] == board[5] && board[5] == x)
 			|| (board[6] == board[7] && board[7] == board[8] && board[8] == x)
 			
@@ -245,9 +259,60 @@ public class TicTacToe extends Application {
 			|| (board[0] == board[4] && board[4] == board[8] && board[8] == x)
 			|| (board[2] == board[4] && board[4] == board[6] && board[6] == x)) {
 			
+			winningButtons(x);
 			return true;
 		}					
 		return false;
+	}
+	
+	public static void winningButtons(int x){
+		if ( board[0] == board[1] && board[1] == board[2] && board [2] == x){
+			btn1.setId("winButton");
+			btn2.setId("winButton");
+			btn3.setId("winButton");
+		}
+		
+		if ( board[3] == board[4] && board[4] == board[5] && board [5] == x){
+			btn4.setId("winButton");
+			btn5.setId("winButton");
+			btn6.setId("winButton");
+		}
+		
+		if ( board[6] == board[7] && board[7] == board[8] && board [8] == x){
+			btn7.setId("winButton");
+			btn8.setId("winButton");
+			btn9.setId("winButton");
+		}
+		
+		if ( board[0] == board[3] && board[3] == board[6] && board [6] == x){
+			btn1.setId("winButton");
+			btn4.setId("winButton");
+			btn7.setId("winButton");
+		}
+		
+		if ( board[1] == board[4] && board[4] == board[7] && board [7] == x){
+			btn2.setId("winButton");
+			btn5.setId("winButton");
+			btn8.setId("winButton");
+		}
+		
+		if ( board[2] == board[5] && board[5] == board[8] && board [8] == x){
+			btn3.setId("winButton");
+			btn6.setId("winButton");
+			btn9.setId("winButton");
+		}
+		
+		if ( board[0] == board[4] && board[4] == board[8] && board [8] == x){
+			btn1.setId("winButton");
+			btn5.setId("winButton");
+			btn9.setId("winButton");
+		}
+		
+		if ( board[2] == board[4] && board[4] == board[6] && board [6] == x){
+			btn3.setId("winButton");
+			btn5.setId("winButton");
+			btn7.setId("winButton");
+		}
 	}
 	
 	public static void main(String[] args) {

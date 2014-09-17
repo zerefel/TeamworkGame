@@ -28,6 +28,11 @@
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
 }
 
+#winButton {
+	-fx-background-color: linear-gradient(#fa3a2b, #fa3533);
+    -fx-text-fill: white;
+}
+
 .button {
     -fx-background-color: 
         linear-gradient(#d6d6d6 50%, white 100%),
