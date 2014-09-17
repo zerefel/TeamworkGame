@@ -14,7 +14,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
- *
  * @author Team "Fashion Fuchsia"
  */
 
@@ -97,7 +96,7 @@ public class TicTacToe extends Application {
 		newGame.setLayoutX(710);
 		newGame.setLayoutY(30);
 		resetScore.setLayoutX(710);
-        resetScore.setLayoutY(110);
+		resetScore.setLayoutY(110);
 		xScore.setLayoutX(690);
 		xScore.setLayoutY(250);
 		oScore.setLayoutX(688);
