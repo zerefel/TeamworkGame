@@ -59,21 +59,13 @@ public class TicTacToe extends Application {
 			
 		// set buttons and labels size and add ID-s
 		btn1.setPrefSize(200, 200);
-		//Button btn2 = new Button("");
 		btn2.setPrefSize(200, 200);
-		//Button btn3 = new Button("");
 		btn3.setPrefSize(200, 200);
-		//Button btn4 = new Button("");
 		btn4.setPrefSize(200, 200);
-		//Button btn5 = new Button("");
 		btn5.setPrefSize(200, 200);
-		//Button btn6 = new Button("");
 		btn6.setPrefSize(200, 200);
-		//Button btn7 = new Button("");
 		btn7.setPrefSize(200, 200);
-		//Button btn8 = new Button("");
 		btn8.setPrefSize(200, 200);
-		//Button btn9 = new Button("");
 		btn9.setPrefSize(200, 200);		
 		newGame.setPrefSize(105, 50);	
 		resetScore.setPrefSize(105, 50);	
@@ -137,8 +129,7 @@ public class TicTacToe extends Application {
 		// Eventhandler for buttons
 		Button[] buttons = {btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
 		for (int i = 0; i < buttons.length; i++) {
-			buttonAction(buttons[i], i);
-			
+			buttonAction(buttons[i], i);		
 		}	
 				
 		// make Scene
@@ -151,7 +142,7 @@ public class TicTacToe extends Application {
 		resetScore();
 	}
 	
-	// 
+	// set Action when btn1..9 pressed
 	static void buttonAction(Button btn, int i){
 		
 		btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -247,79 +238,65 @@ public class TicTacToe extends Application {
 	}
 	
 	// Checking for winner
-	public static boolean isWin (int x) {
-		
-		if (	//check rows
-			   (board[0] == board[1] && board[1] == board[2] && board [2] == x)
-			|| (board[3] == board[4] && board[4] == board[5] && board[5] == x)
-			|| (board[6] == board[7] && board[7] == board[8] && board[8] == x)
-			
-				//check columns
-			|| (board[0] == board[3] && board[3] == board[6] && board[6] == x)
-			|| (board[1] == board[4] && board[4] == board[7] && board[7] == x)
-			|| (board[2] == board[5] && board[5] == board[8] && board[8] == x)
-			
-				//check diagonals
-			|| (board[0] == board[4] && board[4] == board[8] && board[8] == x)
-			|| (board[2] == board[4] && board[4] == board[6] && board[6] == x)) {
-			
-			winningButtons(x);
-			return true;
-		}	
-		
-		return false;
-	}
-	
-	// Setting IDs to winning buttons
-	public static void winningButtons(int x){
+	public static boolean isWin (int x){
 		
 		if ( board[0] == board[1] && board[1] == board[2] && board [2] == x){
 			btn1.setId("winButton");
 			btn2.setId("winButton");
 			btn3.setId("winButton");
+			return true;
 		}
 		
 		if ( board[3] == board[4] && board[4] == board[5] && board [5] == x){
 			btn4.setId("winButton");
 			btn5.setId("winButton");
 			btn6.setId("winButton");
+			return true;
 		}
 		
 		if ( board[6] == board[7] && board[7] == board[8] && board [8] == x){
 			btn7.setId("winButton");
 			btn8.setId("winButton");
 			btn9.setId("winButton");
+			return true;
 		}
 		
 		if ( board[0] == board[3] && board[3] == board[6] && board [6] == x){
 			btn1.setId("winButton");
 			btn4.setId("winButton");
 			btn7.setId("winButton");
+			return true;
 		}
 		
 		if ( board[1] == board[4] && board[4] == board[7] && board [7] == x){
 			btn2.setId("winButton");
 			btn5.setId("winButton");
 			btn8.setId("winButton");
+			return true;
 		}
 		
 		if ( board[2] == board[5] && board[5] == board[8] && board [8] == x){
 			btn3.setId("winButton");
 			btn6.setId("winButton");
 			btn9.setId("winButton");
+			return true;
 		}
 		
 		if ( board[0] == board[4] && board[4] == board[8] && board [8] == x){
 			btn1.setId("winButton");
 			btn5.setId("winButton");
 			btn9.setId("winButton");
+			return true;
 		}
 		
 		if ( board[2] == board[4] && board[4] == board[6] && board [6] == x){
 			btn3.setId("winButton");
 			btn5.setId("winButton");
 			btn7.setId("winButton");
+			return true;
 		}
+		
+		return false;
 	}
 	
 	public static void main(String[] args) {
