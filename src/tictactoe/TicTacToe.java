@@ -3,6 +3,7 @@ package tictactoe;
 import java.io.File;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -39,6 +40,7 @@ public class TicTacToe extends Application {
 	static Button btn9 = new Button("");
 	static Button newGame = new Button("New Game");
 	static Button resetScore = new Button("Reset Score");
+	static Button exitGame = new Button("Exit");
 	static Label status = new Label();
 	static Label xScore = new Label("X score: 0");
 	static Label oScore = new Label("O score: 0");	
@@ -67,7 +69,8 @@ public class TicTacToe extends Application {
 		btn8.setPrefSize(200, 200);
 		btn9.setPrefSize(200, 200);		
 		newGame.setPrefSize(105, 50);	
-		resetScore.setPrefSize(105, 50);	
+		resetScore.setPrefSize(105, 50);
+		exitGame.setPrefSize(105, 50);
 		xScore.setId(("xScore"));
 		oScore.setId(("oScore"));
 		status.setId(("lblStatus"));
@@ -94,9 +97,11 @@ public class TicTacToe extends Application {
 		btn9.setLayoutX(400);
 		btn9.setLayoutY(400);	
 		newGame.setLayoutX(710);
-		newGame.setLayoutY(30);
+		newGame.setLayoutY(10);
 		resetScore.setLayoutX(710);
-		resetScore.setLayoutY(110);
+		resetScore.setLayoutY(80);
+		exitGame.setLayoutX(710);
+		exitGame.setLayoutY(150);
 		xScore.setLayoutX(690);
 		xScore.setLayoutY(250);
 		oScore.setLayoutX(688);
@@ -119,6 +124,7 @@ public class TicTacToe extends Application {
 		root.getChildren().add(btn9);
 		root.getChildren().add(newGame);
 		root.getChildren().add(resetScore);
+		root.getChildren().add(exitGame);
 		root.getChildren().add(xScore);
 		root.getChildren().add(oScore);
 		root.getChildren().add(status);
@@ -139,6 +145,7 @@ public class TicTacToe extends Application {
 		primaryStage.show();	
 		newGame(buttons);	
 		resetScore();
+		exitGame();
 	}
 	
 	// set Action when btn1..9 pressed
@@ -232,6 +239,16 @@ public class TicTacToe extends Application {
 				oPlayerScore = 0;
 				xScore.setText("X score: " + oPlayerScore);
 				oScore.setText("O score: " + oPlayerScore);
+			}
+		});	
+	}
+	
+	//Exit game
+	static void exitGame(){
+		
+		exitGame.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {		
+				Platform.exit();
 			}
 		});	
 	}
