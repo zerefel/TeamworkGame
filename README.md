@@ -1,7 +1,6 @@
 Java TeamWork Game
 =====================
 Tic-Tac-Toe Game
-
 team: Fashion Fuchsia:
  * zerefel
  * macry
